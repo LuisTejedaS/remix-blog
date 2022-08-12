@@ -33,7 +33,7 @@ function NewPost() {
         <form method='post' action="/posts/new">
           <div className="form-control">
             <label htmlFor="title">Title</label>
-            <input type="text" name="title" placeholder="Title" id="title"></input>
+            <input type="text" name="title" placeholder="Title" id="title"/>
           </div>
           <div className="form-control">
             <label htmlFor="body">Post Body</label>
