@@ -20,8 +20,7 @@ export const loader: LoaderFunction = async ({request, params}) => {
 }
 
 export const action: ActionFunction = async ({ request, params }) => {
-  const formData = await request.formData(); 
-  console.log(params.postId)
+  const formData = await request.formData();
   if(formData.get("_method")=== "delete"){
     await db.post.delete({ where:{id: params.postId } }); 
   }
