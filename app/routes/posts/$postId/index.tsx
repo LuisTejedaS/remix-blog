@@ -1,11 +1,7 @@
-import { useLoaderData, Link,   Outlet } from "@remix-run/react";
+import { useLoaderData, Link } from "@remix-run/react";
 import { db } from '~/utils/db.server';
-import {
-  redirect
-} from "@remix-run/node";
 import type {
-  LoaderFunction,
-  ActionFunction
+  LoaderFunction
 } from "@remix-run/node";
 
 
