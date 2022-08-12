@@ -1,9 +1,12 @@
-import { useLoaderData, Link } from "@remix-run/react";
+import { useLoaderData, Link, Form } from "@remix-run/react";
 import { db } from '~/utils/db.server';
 import type {
-  LoaderFunction
+  LoaderFunction,
+  ActionFunction
 } from "@remix-run/node";
-
+import {
+  redirect
+} from "@remix-run/node";
 
 export const loader: LoaderFunction = async ({request, params}) => {
   const post = await db.post.findUnique({
@@ -15,6 +18,15 @@ export const loader: LoaderFunction = async ({request, params}) => {
   const data = {post};
   return data;
 }
+
+export const action: ActionFunction = async ({ request, params }) => {
+  const formData = await request.formData(); 
+  console.log(params.postId)
+  if(formData.get("_method")=== "delete"){
+    await db.post.delete({ where:{id: params.postId } }); 
+  }
+  return redirect(`/posts`)
+};
 
   function Post() {
     // const params = useParams()
@@ -34,10 +46,10 @@ export const loader: LoaderFunction = async ({request, params}) => {
           {post.body}
         </div>
         <div className="page-footer">
-          <form method="POST">
+          <Form method="post" action="?index">
             <input type="hidden" name="_method" value="delete"/>
             <button className="btn btn-delete">Delete</button>
-          </form>
+          </Form>
         </div>
       </div>
     )
